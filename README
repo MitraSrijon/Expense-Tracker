@@ -1,0 +1,53 @@
+# Expense Tracker
+
+A full-stack Expense Tracker application built using Spring Boot and Angular.
+
+This project is being developed from scratch as a learning project with a focus on understanding software design, backend development, REST APIs, and frontend integration instead of following tutorials.
+
+## Tech Stack
+
+### Backend
+- Java
+- Spring Boot
+- Spring Data JPA
+- MySQL
+- Maven
+- Lombok
+
+### Frontend
+- Angular (Coming Soon)
+
+## Current Features
+
+- Spring Boot project setup
+- MySQL configuration
+- Expense entity
+- Category enum
+- Payment Method enum
+
+## Project Status
+
+🚧 Under Development
+
+## Learning Goals
+
+- REST API Design
+- Database Modeling
+- Spring Boot Best Practices
+- Angular Integration
+- Clean Architecture
+- Git & GitHub Workflow
+
+## Future Features
+
+- CRUD APIs
+- Search
+- Filters
+- Monthly Reports
+- Dashboard
+- Authentication
+- Charts
+
+## Author
+
+Srijon Mitra
