@@ -1,7 +1,9 @@
 package com.srijon.expense_tracker_backend.service;
 
+import com.srijon.expense_tracker_backend.exception.ExpenseNotFoundException;
 import com.srijon.expense_tracker_backend.model.Expense;
 import com.srijon.expense_tracker_backend.repository.ExpenseRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,15 +31,18 @@ public class ExpenseService {
     }
 
     //Logic of finding expense using id
-    public Optional<Expense> getExpenseById(Long id){
-        return expenseRepository.findById(id);
+    public Expense getExpenseById(Long id){
+        return expenseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ExpenseNotFoundException("Expense not found with id: " + id));
     }
 
     //Logic of updating any given expense
     public Expense updateExpense(Long id, Expense expense){
 
         Expense existingExpense = expenseRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new ExpenseNotFoundException("Expense not found with id: " + id));
 
         existingExpense.setTitle(expense.getTitle());
         existingExpense.setAmount(expense.getAmount());
@@ -51,7 +56,11 @@ public class ExpenseService {
 
     //Logic of deleting any expense from database
     public void deleteExpense(Long id){
-        expenseRepository.deleteById(id);
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ExpenseNotFoundException("Expense not found with id: " + id));
+
+        expenseRepository.delete(expense);
     }
 
 }

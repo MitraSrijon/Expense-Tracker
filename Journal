@@ -1,0 +1,46 @@
+# Engineering Journal
+
+## Day 1 - Project Setup & Entity Design
+
+- Created Spring Boot Expense Tracker project.
+- Connected MySQL database.
+- Designed Expense entity with:
+  - id
+  - title
+  - amount
+  - expenseDate
+  - category
+  - description
+  - paymentMethod
+- Used BigDecimal for amount and LocalDate for expense date.
+- Created enums for Category and PaymentMethod.
+- Used `@Enumerated(EnumType.STRING)` to store enum values properly.
+- Added Lombok (`@Data`, `@NoArgsConstructor`) to reduce boilerplate.
+
+Key Learning:
+- Avoid storing calculated data like total expenses.
+- Entity design should represent meaningful data only.
+
+---
+
+## Day 2 - CRUD Backend Implementation
+
+- Created ExpenseRepository using JpaRepository.
+- Implemented Service layer.
+- Implemented ExpenseController.
+- Completed CRUD APIs:
+  - Create expense
+  - Get expenses
+  - Get expense by ID
+  - Update expense
+  - Delete expense
+
+Key Learning:
+- Followed flow:
+  Controller → Service → Repository → Database
+- Update operation should verify existing data before saving.
+- Constructor injection used for dependency management.
+
+Next:
+- Test APIs with Postman.
+- Add exception handling and validation.
