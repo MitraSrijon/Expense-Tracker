@@ -11,6 +11,7 @@ import tools.jackson.core.PrettyPrinter;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/expenses")
 public class ExpenseController {
