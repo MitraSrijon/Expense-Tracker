@@ -1,5 +1,4 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { Home } from './components/home/home';
 
 @Component({
@@ -8,6 +7,4 @@ import { Home } from './components/home/home';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('expense-tracker-frontend');
-}
+export class App {}

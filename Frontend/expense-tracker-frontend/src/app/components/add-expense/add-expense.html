@@ -1,0 +1,48 @@
+<h2>Add Expense</h2>
+
+<form [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
+  <label>Title</label>
+  <input type="text" formControlName="title" />
+
+  <br /><br />
+
+  <label>Amount</label>
+  <input type="number" formControlName="amount" />
+
+  <br /><br />
+
+  <label>Category</label>
+  <select formControlName="category">
+    <option value="">Select</option>
+    <option value="FOOD">Food</option>
+    <option value="TRAVEL">Travel</option>
+    <option value="SHOPPING">Shopping</option>
+    <option value="BILLS">Bills</option>
+    <option value="ENTERTAINMENT">Entertainment</option>
+    <option value="OTHER">Other</option>
+  </select>
+
+  <br /><br />
+
+  <label>Date</label>
+  <input type="date" formControlName="expenseDate" />
+
+  <br /><br />
+
+  <label>Payment Method</label>
+  <select formControlName="paymentMethod">
+    <option value="">Select</option>
+    <option value="CASH">Cash</option>
+    <option value="CARD">Card</option>
+    <option value="UPI">UPI</option>
+  </select>
+
+  <br /><br />
+
+  <label>Description</label>
+  <textarea formControlName="description"></textarea>
+
+  <br /><br />
+
+  <button type="submit">Save Expense</button>
+</form>

@@ -1,9 +1,10 @@
-import { Service } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
 import { Expense } from '../models/expense';
 
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class ExpenseService {
   private http = inject(HttpClient);
 
@@ -11,5 +12,9 @@ export class ExpenseService {
 
   getAllExpenses() {
     return this.http.get<Expense[]>(this.apiUrl);
+  }
+
+  addExpense(expense: Expense) {
+    return this.http.post<Expense>(this.apiUrl, expense);
   }
 }
