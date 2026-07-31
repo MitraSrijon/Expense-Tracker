@@ -1,14 +1,37 @@
-<app-add-expense (expenseAdded)="loadExpenses()"></app-add-expense>
+<div class="container">
+  <app-header></app-header>
 
-<hr />
+  <section class="summary">
+    <div class="card">
+      <h3>Total Expenses</h3>
+      <p>₹ {{ getTotalExpenses() }}</p>
+    </div>
 
-<h2>Expense Tracker</h2>
+    <div class="card">
+      <h3>This Month</h3>
+      <p>₹ {{ getTotalExpenses() }}</p>
+    </div>
 
-@for (expense of expenses; track expense.id) {
-  <div>
-    <h3>{{ expense.title }}</h3>
-    <p>₹ {{ expense.amount }}</p>
-    <p>{{ expense.category }}</p>
-    <hr />
-  </div>
-}
+    <div class="card">
+      <h3>Total Transactions</h3>
+      <p>{{ getTotalTransactions() }}</p>
+    </div>
+  </section>
+
+  <section class="expenses">
+    @for (expense of expenses; track expense.id) {
+      <div class="expense-card">
+        <div>
+          <h3>{{ expense.title }}</h3>
+          <p>{{ expense.category }}</p>
+        </div>
+
+        <div class="actions">
+          <h2>₹ {{ expense.amount }}</h2>
+
+          <button (click)="deleteExpense(expense.id)">Delete</button>
+        </div>
+      </div>
+    }
+  </section>
+</div>
