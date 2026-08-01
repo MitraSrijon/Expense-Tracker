@@ -1,4 +1,6 @@
-<h2>Add Expense</h2>
+<h2>
+  {{ isEditMode ? 'Edit Expense' : 'Add Expense' }}
+</h2>
 
 <form [formGroup]="expenseForm" (ngSubmit)="saveExpense()">
   <label>Title</label>
@@ -15,7 +17,7 @@
   <select formControlName="category">
     <option value="">Select</option>
     <option value="FOOD">Food</option>
-    <option value="TRAVEL">Travel</option>
+    <option value="TRANSPORT">Transport</option>
     <option value="SHOPPING">Shopping</option>
     <option value="BILLS">Bills</option>
     <option value="ENTERTAINMENT">Entertainment</option>
@@ -35,6 +37,7 @@
     <option value="CASH">Cash</option>
     <option value="CARD">Card</option>
     <option value="UPI">UPI</option>
+    <option value="NET_BANKING">Net Banking</option>
   </select>
 
   <br /><br />
@@ -44,5 +47,7 @@
 
   <br /><br />
 
-  <button type="submit">Save Expense</button>
+  <button type="submit">
+    {{ isEditMode ? 'Update Expense' : 'Save Expense' }}
+  </button>
 </form>

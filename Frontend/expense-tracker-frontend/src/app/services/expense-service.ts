@@ -21,4 +21,8 @@ export class ExpenseService {
   addExpense(expense: Expense) {
     return this.http.post<Expense>(this.apiUrl, expense);
   }
+
+  updateExpense(id: number, expense: Expense) {
+    return this.http.put<Expense>(`${this.apiUrl}/${id}`, expense);
+  }
 }

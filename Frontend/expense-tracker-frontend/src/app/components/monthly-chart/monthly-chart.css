@@ -1,0 +1,17 @@
+.chart-card {
+  background: #182235;
+  border: 1px solid #2c3a52;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.chart-card h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+canvas {
+  width: 100% !important;
+  height: 350px !important;
+}

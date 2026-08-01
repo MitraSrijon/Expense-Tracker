@@ -1,5 +1,11 @@
 <div class="container">
-  <app-header></app-header>
+  <app-header
+    (addExpenseClicked)="openAddExpenseModal()"
+    (searchChanged)="onSearch($event)"
+    (categoryChanged)="onCategoryChange($event)"
+    (sortChanged)="onSortChange($event)"
+  >
+  </app-header>
 
   <section class="summary">
     <div class="card">
@@ -9,29 +15,67 @@
 
     <div class="card">
       <h3>This Month</h3>
-      <p>₹ {{ getTotalExpenses() }}</p>
+      <p>₹ {{ getThisMonthExpenses() }}</p>
     </div>
 
     <div class="card">
       <h3>Total Transactions</h3>
       <p>{{ getTotalTransactions() }}</p>
     </div>
+
+    <div class="card">
+      <h3>Highest Expense</h3>
+      <p>₹ {{ getHighestExpense() }}</p>
+    </div>
   </section>
 
   <section class="expenses">
-    @for (expense of expenses; track expense.id) {
-      <div class="expense-card">
-        <div>
-          <h3>{{ expense.title }}</h3>
-          <p>{{ expense.category }}</p>
-        </div>
-
-        <div class="actions">
-          <h2>₹ {{ expense.amount }}</h2>
-
-          <button (click)="deleteExpense(expense.id)">Delete</button>
-        </div>
+    @if (filteredExpenses.length === 0) {
+      <div class="empty-state">
+        <h2>No expenses found</h2>
+        <p>Try another search or category.</p>
       </div>
+    } @else {
+      @for (expense of filteredExpenses; track expense.id) {
+        <div class="expense-card">
+          <div class="expense-left">
+            <div class="title-row">
+              <h3>{{ expense.title }}</h3>
+
+              <span class="category-badge">
+                {{ expense.category }}
+              </span>
+            </div>
+
+            <div class="date">
+              {{ expense.expenseDate }}
+            </div>
+          </div>
+
+          <div class="expense-right">
+            <h2>₹ {{ expense.amount }}</h2>
+
+            <div class="action-buttons">
+              <button class="edit-btn" (click)="editExpense(expense)">Edit</button>
+
+              <button class="delete-btn" (click)="deleteExpense(expense.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      }
     }
   </section>
+
+  <app-monthly-chart [expenses]="filteredExpenses"> </app-monthly-chart>
 </div>
+
+@if (showAddExpenseModal) {
+  <div class="modal-backdrop">
+    <div class="modal">
+      <app-add-expense [expense]="selectedExpense" (expenseAdded)="onExpenseSaved()">
+      </app-add-expense>
+
+      <button class="close-btn" (click)="closeAddExpenseModal()">Close</button>
+    </div>
+  </div>
+}

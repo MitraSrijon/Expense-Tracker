@@ -1,5 +1,29 @@
-<header>
+<header class="header">
   <h1>Expense Tracker</h1>
 
-  <button>Add Expense</button>
+  <input
+    type="text"
+    placeholder="Search expenses..."
+    [(ngModel)]="searchText"
+    (input)="searchChanged.emit(searchText)"
+  />
+
+  <select (change)="categoryChanged.emit($any($event.target).value)">
+    <option value="ALL">All Categories</option>
+    <option value="FOOD">Food</option>
+    <option value="TRAVEL">Transport</option>
+    <option value="SHOPPING">Shopping</option>
+    <option value="BILLS">Bills</option>
+    <option value="ENTERTAINMENT">Entertainment</option>
+    <option value="OTHER">Other</option>
+  </select>
+
+  <select (change)="sortChanged.emit($any($event.target).value)">
+    <option value="NEWEST">Newest</option>
+    <option value="OLDEST">Oldest</option>
+    <option value="HIGH">Highest Amount</option>
+    <option value="LOW">Lowest Amount</option>
+  </select>
+
+  <button (click)="addExpenseClicked.emit()">Add Expense</button>
 </header>
