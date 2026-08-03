@@ -4,6 +4,7 @@
     (searchChanged)="onSearch($event)"
     (categoryChanged)="onCategoryChange($event)"
     (sortChanged)="onSortChange($event)"
+    (monthChanged)="onMonthChange($event)"
   >
   </app-header>
 
@@ -58,7 +59,7 @@
             <div class="action-buttons">
               <button class="edit-btn" (click)="editExpense(expense)">Edit</button>
 
-              <button class="delete-btn" (click)="deleteExpense(expense.id)">Delete</button>
+              <button class="delete-btn" (click)="confirmDelete(expense.id)">Delete</button>
             </div>
           </div>
         </div>
@@ -66,7 +67,11 @@
     }
   </section>
 
-  <app-monthly-chart [expenses]="filteredExpenses"> </app-monthly-chart>
+  <section class="charts-section">
+    <app-monthly-chart [expenses]="filteredExpenses"> </app-monthly-chart>
+
+    <app-category-chart [expenses]="filteredExpenses"> </app-category-chart>
+  </section>
 </div>
 
 @if (showAddExpenseModal) {
@@ -76,6 +81,22 @@
       </app-add-expense>
 
       <button class="close-btn" (click)="closeAddExpenseModal()">Close</button>
+    </div>
+  </div>
+}
+
+@if (showDeleteModal) {
+  <div class="modal-backdrop">
+    <div class="delete-modal">
+      <h2>Delete Expense?</h2>
+
+      <p>This action cannot be undone.</p>
+
+      <div class="delete-buttons">
+        <button class="cancel-btn" (click)="cancelDelete()">Cancel</button>
+
+        <button class="confirm-delete-btn" (click)="deleteExpense()">Delete</button>
+      </div>
     </div>
   </div>
 }

@@ -17,5 +17,7 @@ export class Header {
 
   sortChanged = output<string>();
 
+  monthChanged = output<string>();
+
   searchText = '';
 }

@@ -56,11 +56,53 @@ export class MonthlyChart implements AfterViewInit, OnChanges {
 
         datasets: [
           {
-            label: 'Expenses',
+            label: 'Monthly Expenses',
 
             data: monthlyTotals,
+
+            backgroundColor: '#22c55e',
+
+            borderRadius: 10,
+
+            borderSkipped: false,
           },
         ],
+      },
+
+      options: {
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+
+        scales: {
+          y: {
+            beginAtZero: true,
+
+            grid: {
+              color: '#334155',
+            },
+
+            ticks: {
+              color: '#cbd5e1',
+            },
+          },
+
+          x: {
+            grid: {
+              display: false,
+            },
+
+            ticks: {
+              color: '#cbd5e1',
+            },
+          },
+        },
       },
     });
   }

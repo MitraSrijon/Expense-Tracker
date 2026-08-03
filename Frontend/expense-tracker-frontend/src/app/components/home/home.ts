@@ -4,11 +4,12 @@ import { Expense } from '../../models/expense';
 import { Header } from '../header/header';
 import { AddExpense } from '../add-expense/add-expense';
 import { MonthlyChart } from '../monthly-chart/monthly-chart';
+import { CategoryChart } from '../category-chart/category-chart';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Header, AddExpense, MonthlyChart],
+  imports: [Header, AddExpense, MonthlyChart, CategoryChart],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -17,20 +18,48 @@ export class Home implements OnInit {
 
   expenses: Expense[] = [];
 
+  filteredExpenses: Expense[] = [];
+
   showAddExpenseModal = false;
 
   selectedExpense: Expense | null = null;
 
-  filteredExpenses: Expense[] = [];
-
   searchText = '';
+
   selectedCategory = 'ALL';
 
   sortOption = 'NEWEST';
 
-  onSortChange(sort: string): void {
-    this.sortOption = sort;
-    this.applyFilters();
+  selectedMonth = 'ALL';
+
+  deleteExpenseId: number | null = null;
+
+  showDeleteModal = false;
+
+  confirmDelete(id: number): void {
+    this.deleteExpenseId = id;
+    this.showDeleteModal = true;
+  }
+
+  cancelDelete(): void {
+    this.showDeleteModal = false;
+    this.deleteExpenseId = null;
+  }
+
+  deleteExpense(): void {
+    if (this.deleteExpenseId === null) return;
+
+    this.expenseService.deleteExpense(this.deleteExpenseId).subscribe(() => {
+      this.loadExpenses();
+
+      this.showDeleteModal = false;
+
+      this.deleteExpenseId = null;
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadExpenses();
   }
 
   loadExpenses() {
@@ -52,7 +81,14 @@ export class Home implements OnInit {
       const matchesCategory =
         this.selectedCategory === 'ALL' || expense.category === this.selectedCategory;
 
-      return matchesSearch && matchesCategory;
+      let matchesMonth = true;
+
+      if (this.selectedMonth !== 'ALL') {
+        const expenseMonth = expense.expenseDate.substring(0, 7); // yyyy-MM
+        matchesMonth = expenseMonth === this.selectedMonth;
+      }
+
+      return matchesSearch && matchesCategory && matchesMonth;
     });
 
     switch (this.sortOption) {
@@ -83,26 +119,43 @@ export class Home implements OnInit {
     this.applyFilters();
   }
 
-  deleteExpense(id: number) {
-    const confirmed = confirm('Are you sure you want to delete this expense?');
+  onCategoryChange(category: string): void {
+    this.selectedCategory = category;
+    this.applyFilters();
+  }
 
-    if (!confirmed) {
-      return;
-    }
+  onSortChange(sort: string): void {
+    this.sortOption = sort;
+    this.applyFilters();
+  }
 
-    this.expenseService.deleteExpense(id).subscribe(() => {
-      this.loadExpenses();
-    });
+  onMonthChange(month: string): void {
+    this.selectedMonth = month;
+    this.applyFilters();
+  }
+
+  openAddExpenseModal(): void {
+    this.showAddExpenseModal = true;
+  }
+
+  closeAddExpenseModal(): void {
+    this.showAddExpenseModal = false;
+    this.selectedExpense = null;
+  }
+
+  onExpenseSaved(): void {
+    this.loadExpenses();
+    this.selectedExpense = null;
+    this.closeAddExpenseModal();
   }
 
   editExpense(expense: Expense): void {
     this.selectedExpense = expense;
-
     this.showAddExpenseModal = true;
   }
 
   getTotalExpenses(): number {
-    return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+    return this.filteredExpenses.reduce((total, expense) => total + expense.amount, 0);
   }
 
   getTotalTransactions(): number {
@@ -118,63 +171,6 @@ export class Home implements OnInit {
   }
 
   getThisMonthExpenses(): number {
-    const now = new Date();
-
-    const currentMonth = now.getMonth() + 1;
-    const currentYear = now.getFullYear();
-
-    this.filteredExpenses.forEach((expense) => {
-      const [year, month] = expense.expenseDate.split('-').map(Number);
-    });
-
-    return this.filteredExpenses
-      .filter((expense) => {
-        const [year, month] = expense.expenseDate.split('-').map(Number);
-
-        return month === currentMonth && year === currentYear;
-      })
-      .reduce((sum, expense) => sum + expense.amount, 0);
-  }
-
-  getCurrentMonthExpenses(): number {
-    const currentDate = new Date();
-
-    return this.expenses
-      .filter((expense) => {
-        const expenseDate = new Date(expense.expenseDate);
-
-        return (
-          expenseDate.getMonth() === currentDate.getMonth() &&
-          expenseDate.getFullYear() === currentDate.getFullYear()
-        );
-      })
-      .reduce((total, expense) => total + expense.amount, 0);
-  }
-
-  ngOnInit(): void {
-    this.loadExpenses();
-  }
-
-  openAddExpenseModal(): void {
-    console.log('Add Expense clicked!');
-    this.showAddExpenseModal = true;
-  }
-
-  closeAddExpenseModal(): void {
-    this.showAddExpenseModal = false;
-    this.selectedExpense = null;
-  }
-
-  onExpenseSaved(): void {
-    this.loadExpenses();
-
-    this.selectedExpense = null;
-
-    this.closeAddExpenseModal();
-  }
-
-  onCategoryChange(category: string): void {
-    this.selectedCategory = category;
-    this.applyFilters();
+    return this.filteredExpenses.reduce((total, expense) => total + expense.amount, 0);
   }
 }
