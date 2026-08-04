@@ -8,10 +8,10 @@ Track your daily expenses with an intuitive dashboard, interactive charts, filte
 
 ## 📸 Screenshots
 
-- Dashboard (Expense Tracker/Screenshots/Dashboard.png)
-- Add Expense (Expense Tracker/Screenshots/Add:Edit Info.png)
-- Charts (Expense Tracker/Screenshots/Charts.png)
-- Expense List (Expense Tracker/Screenshots/lists.png)
+- Dashboard
+- Add/edit Expense
+- Charts Expense
+- List
 
 ---
 
