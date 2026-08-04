@@ -31,38 +31,45 @@
   </section>
 
   <section class="expenses">
-    @if (filteredExpenses.length === 0) {
-      <div class="empty-state">
-        <h2>No expenses found</h2>
-        <p>Try another search or category.</p>
+    @if (loading) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading expenses...</p>
       </div>
     } @else {
-      @for (expense of filteredExpenses; track expense.id) {
-        <div class="expense-card">
-          <div class="expense-left">
-            <div class="title-row">
-              <h3>{{ expense.title }}</h3>
-
-              <span class="category-badge">
-                {{ expense.category }}
-              </span>
-            </div>
-
-            <div class="date">
-              {{ expense.expenseDate }}
-            </div>
-          </div>
-
-          <div class="expense-right">
-            <h2>₹ {{ expense.amount }}</h2>
-
-            <div class="action-buttons">
-              <button class="edit-btn" (click)="editExpense(expense)">Edit</button>
-
-              <button class="delete-btn" (click)="confirmDelete(expense.id)">Delete</button>
-            </div>
-          </div>
+      @if (filteredExpenses.length === 0) {
+        <div class="empty-state">
+          <h2>No expenses found</h2>
+          <p>Try changing your filters or add a new expense.</p>
         </div>
+      } @else {
+        @for (expense of filteredExpenses; track expense.id) {
+          <div class="expense-card">
+            <div class="expense-left">
+              <div class="title-row">
+                <h3>{{ expense.title }}</h3>
+
+                <span class="category-badge">
+                  {{ expense.category }}
+                </span>
+              </div>
+
+              <div class="date">
+                {{ expense.expenseDate | date: 'dd MMM yyyy' }}
+              </div>
+            </div>
+
+            <div class="expense-right">
+              <h2>₹ {{ expense.amount }}</h2>
+
+              <div class="action-buttons">
+                <button class="edit-btn" (click)="editExpense(expense)">Edit</button>
+
+                <button class="delete-btn" (click)="confirmDelete(expense.id)">Delete</button>
+              </div>
+            </div>
+          </div>
+        }
       }
     }
   </section>

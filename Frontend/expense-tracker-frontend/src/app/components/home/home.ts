@@ -5,11 +5,12 @@ import { Header } from '../header/header';
 import { AddExpense } from '../add-expense/add-expense';
 import { MonthlyChart } from '../monthly-chart/monthly-chart';
 import { CategoryChart } from '../category-chart/category-chart';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Header, AddExpense, MonthlyChart, CategoryChart],
+  imports: [Header, AddExpense, MonthlyChart, CategoryChart, DatePipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -35,6 +36,8 @@ export class Home implements OnInit {
   deleteExpenseId: number | null = null;
 
   showDeleteModal = false;
+
+  loading = true;
 
   confirmDelete(id: number): void {
     this.deleteExpenseId = id;
@@ -62,14 +65,19 @@ export class Home implements OnInit {
     this.loadExpenses();
   }
 
-  loadExpenses() {
+  loadExpenses(): void {
+    this.loading = true;
+
     this.expenseService.getAllExpenses().subscribe({
       next: (data) => {
         this.expenses = data;
         this.applyFilters();
+        this.loading = false;
       },
+
       error: (err) => {
         console.error(err);
+        this.loading = false;
       },
     });
   }

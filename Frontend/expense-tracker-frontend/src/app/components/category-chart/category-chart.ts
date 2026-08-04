@@ -15,18 +15,18 @@ export class CategoryChart implements AfterViewInit, OnChanges {
 
   chart!: Chart;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.createChart();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['expenses'] && this.chart) {
       this.chart.destroy();
       this.createChart();
     }
   }
 
-  private createChart() {
+  private createChart(): void {
     const categoryTotals: { [key: string]: number } = {};
 
     this.expenses.forEach((expense) => {
@@ -57,23 +57,39 @@ export class CategoryChart implements AfterViewInit, OnChanges {
               '#06B6D4',
               '#64748B',
             ],
+
+            borderWidth: 2,
+            borderColor: '#182235',
           },
         ],
       },
 
       options: {
         responsive: true,
-
         maintainAspectRatio: false,
+
+        layout: {
+          padding: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+          },
+        },
 
         plugins: {
           legend: {
             position: 'bottom',
 
             labels: {
-              boxWidth: 14,
-              padding: 15,
               color: '#ffffff',
+              boxWidth: 12,
+              boxHeight: 12,
+              padding: 12,
+
+              font: {
+                size: 11,
+              },
             },
           },
         },

@@ -71,8 +71,8 @@ export class MonthlyChart implements AfterViewInit, OnChanges {
 
       options: {
         responsive: true,
-
         maintainAspectRatio: false,
+        animation: false,
 
         plugins: {
           legend: {
@@ -80,14 +80,16 @@ export class MonthlyChart implements AfterViewInit, OnChanges {
           },
         },
 
+        layout: {
+          padding: 10,
+        },
+
         scales: {
           y: {
             beginAtZero: true,
-
             grid: {
               color: '#334155',
             },
-
             ticks: {
               color: '#cbd5e1',
             },
@@ -97,7 +99,6 @@ export class MonthlyChart implements AfterViewInit, OnChanges {
             grid: {
               display: false,
             },
-
             ticks: {
               color: '#cbd5e1',
             },

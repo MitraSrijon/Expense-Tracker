@@ -1,6 +1,9 @@
 .header {
+  width: 100%;
   margin-bottom: 40px;
 }
+
+/* ================= TITLE ================= */
 
 .title-section {
   margin-bottom: 28px;
@@ -21,27 +24,18 @@
   color: #94a3b8;
 }
 
-/* Controls */
+/* ================= CONTROLS ================= */
 
 .header-controls {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.header-controls input {
-  flex: 1;
-  min-width: 320px;
-  height: 56px;
-}
-
-.header-controls select {
-  width: 200px;
-  height: 56px;
+  width: 100%;
 }
 
 .header-controls input,
 .header-controls select {
+  height: 56px;
   background: #182235;
   color: white;
   border: 1px solid #334155;
@@ -49,6 +43,14 @@
   padding: 0 18px;
   font-size: 1rem;
   outline: none;
+}
+
+/* Search */
+
+.header-controls input {
+  flex: 1;
+  min-width: 0; /* IMPORTANT */
+  width: auto;
 }
 
 .header-controls input::placeholder {
@@ -60,11 +62,18 @@
   border-color: #22c55e;
 }
 
-.add-btn {
-  margin-left: auto;
+/* Dropdowns */
 
+.header-controls select {
+  width: 190px;
+  flex-shrink: 0;
+}
+
+/* Button */
+
+.add-btn {
   height: 56px;
-  padding: 0 30px;
+  padding: 0 28px;
 
   border: none;
   border-radius: 14px;
@@ -76,10 +85,11 @@
   font-weight: 700;
 
   cursor: pointer;
-
   white-space: nowrap;
 
   transition: 0.25s;
+
+  flex-shrink: 0;
 }
 
 .add-btn:hover {
@@ -87,16 +97,82 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 1000px) {
+/* ================= TABLET ================= */
+
+@media (max-width: 1100px) {
   .header-controls {
     flex-wrap: wrap;
   }
 
   .header-controls input {
-    flex-basis: 100%;
+    flex: 1 1 100%;
+    width: 100%;
   }
 
   .header-controls select {
     flex: 1;
+    min-width: 170px;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .expense-left,
+  .expense-right {
+    width: 100%;
+  }
+
+  .expense-right {
+    align-items: flex-start;
+  }
+
+  .expense-right h2 {
+    font-size: 2.3rem;
+  }
+
+  .action-buttons {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .action-buttons button {
+    flex: 1;
+  }
+
+  /* FIXED CHART SPACING */
+
+  .charts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* space between charts */
+    margin-top: 40px;
+  }
+
+  .charts-section app-monthly-chart,
+  .charts-section app-category-chart {
+    display: block;
+    width: 100%;
+    height: 380px;
   }
 }

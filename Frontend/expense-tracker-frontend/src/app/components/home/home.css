@@ -13,12 +13,13 @@
 }
 
 .container {
+  width: 100%;
   max-width: 1300px;
-  margin: auto;
+  margin: 0 auto;
   padding: 40px;
 }
 
-/* SUMMARY */
+/* ================= SUMMARY ================= */
 
 .summary {
   display: grid;
@@ -44,7 +45,7 @@
   font-weight: bold;
 }
 
-/* EXPENSE LIST */
+/* ================= EXPENSE LIST ================= */
 
 .expenses {
   display: flex;
@@ -70,8 +71,6 @@
   transform: translateY(-3px);
 }
 
-/* LEFT */
-
 .expense-left {
   display: flex;
   flex-direction: column;
@@ -82,6 +81,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-wrap: wrap;
 }
 
 .title-row h3 {
@@ -101,8 +101,6 @@
   font-size: 1.1rem;
 }
 
-/* RIGHT */
-
 .expense-right {
   display: flex;
   flex-direction: column;
@@ -114,8 +112,6 @@
   color: #22c55e;
   font-size: 3rem;
 }
-
-/* BUTTONS */
 
 .action-buttons {
   display: flex;
@@ -148,7 +144,7 @@
   background: #dc2626;
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
 
 .modal-backdrop {
   position: fixed;
@@ -158,14 +154,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding: 20px;
+  overflow-y: auto;
+
+  z-index: 999;
 }
 
 .modal {
   background: #1e293b;
   padding: 30px;
-  border-radius: 16px;
+  border-radius: 18px;
+
   width: 520px;
   max-width: 90%;
+  max-height: 90vh;
+
+  overflow-y: auto;
 }
 
 .close-btn {
@@ -174,9 +179,83 @@
   padding: 12px;
 }
 
-/* RESPONSIVE */
+/* ================= EMPTY ================= */
 
-@media (max-width: 900px) {
+.empty-state {
+  background: #182235;
+  border: 1px dashed #334155;
+  border-radius: 20px;
+  padding: 60px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.empty-state h2 {
+  color: white;
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+}
+
+/* ================= CHARTS ================= */
+
+.charts-section {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.charts-section > * {
+  min-width: 0;
+}
+
+.charts-section app-monthly-chart,
+.charts-section app-category-chart {
+  display: block;
+  height: 430px;
+}
+
+/* ================= LOADING ================= */
+
+.loading-state {
+  background: #182235;
+  border-radius: 20px;
+  padding: 70px;
+  text-align: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin: auto auto 20px;
+
+  border: 5px solid #334155;
+  border-top-color: #22c55e;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-state p {
+  color: #94a3b8;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
   .summary {
     grid-template-columns: 1fr;
   }
@@ -184,36 +263,51 @@
   .expense-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 25px;
+    gap: 24px;
+  }
+
+  .expense-left,
+  .expense-right {
+    width: 100%;
   }
 
   .expense-right {
     align-items: flex-start;
   }
-}
 
-.empty-state {
-  background: #182235;
+  .expense-right h2 {
+    font-size: 2.3rem;
+  }
 
-  border: 1px dashed #334155;
+  .action-buttons {
+    width: 100%;
+    flex-wrap: wrap;
+  }
 
-  border-radius: 20px;
+  .action-buttons button {
+    flex: 1;
+  }
 
-  padding: 60px;
+  /* ===== Charts ===== */
 
-  text-align: center;
+  .charts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+    width: 100%;
+  }
 
-  color: #94a3b8;
-}
+  .charts-section > * {
+    width: 100%;
+    min-height: 420px;
+  }
 
-.empty-state h2 {
-  color: white;
-
-  margin-bottom: 12px;
-
-  font-size: 1.8rem;
-}
-
-.empty-state p {
-  font-size: 1rem;
+  .charts-section app-monthly-chart,
+  .charts-section app-category-chart {
+    display: block;
+    width: 100%;
+    min-height: 420px;
+    height: auto;
+  }
 }
