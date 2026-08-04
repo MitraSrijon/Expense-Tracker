@@ -1,53 +1,155 @@
-# Expense Tracker
+# 💰 Expense Tracker
 
-A full-stack Expense Tracker application built using Spring Boot and Angular.
+A modern full-stack Expense Tracker application built using **Angular 22**, **Spring Boot**, and **MySQL**.
 
-This project is being developed from scratch as a learning project with a focus on understanding software design, backend development, REST APIs, and frontend integration instead of following tutorials.
+Track your daily expenses with an intuitive dashboard, interactive charts, filtering, and responsive design.
 
-## Tech Stack
+---
 
-### Backend
-- Java
-- Spring Boot
-- Spring Data JPA
-- MySQL
-- Maven
-- Lombok
+## 📸 Screenshots
+
+- Dashboard (Expense Tracker/Screenshots/Dashboard.png)
+- Add Expense (Expense Tracker/Screenshots/Add:Edit Info.png)
+- Charts (Expense Tracker/Screenshots/Charts.png)
+- Expense List (Expense Tracker/Screenshots/lists.png)
+
+---
+
+## 🚀 Features
+
+### Expense Management
+
+- Add new expense
+- Edit existing expense
+- Delete expense
+- Confirmation before deleting
+
+### Dashboard
+
+- Total Expenses
+- Current Month Expenses
+- Total Transactions
+- Highest Expense
+
+### Search & Filters
+
+- Search by title
+- Filter by category
+- Filter by month
+- Sort by
+  - Newest
+  - Oldest
+  - Highest Amount
+  - Lowest Amount
+
+### Analytics
+
+- Monthly Expense Bar Chart
+- Category-wise Pie Chart
+
+### User Experience
+
+- Responsive UI
+- Loading Spinner
+- Empty State
+- Modern Dark Theme
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
-- Angular (Coming Soon)
 
-## Current Features
+- Angular 22
+- TypeScript
+- Chart.js
+- HTML5
+- CSS3
 
-- Spring Boot project setup
-- MySQL configuration
-- Expense entity
-- Category enum
-- Payment Method enum
+### Backend
 
-## Project Status
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Hibernate
+- MySQL
 
-🚧 Under Development
+---
 
-## Learning Goals
+## 📂 Project Structure
 
-- REST API Design
-- Database Modeling
-- Spring Boot Best Practices
-- Angular Integration
-- Clean Architecture
-- Git & GitHub Workflow
+Expense Tracker
+├── Frontend (Angular)
+└── Backend (Spring Boot)
 
-## Future Features
+---
 
-- CRUD APIs
-- Search
-- Filters
-- Monthly Reports
-- Dashboard
-- Authentication
-- Charts
+## ⚙️ Installation
+
+### Backend
+
+```bash
+cd Backend
+```
+
+Update your MySQL credentials in
+
+```
+application.properties
+```
+
+Run
+
+```bash
+mvn spring-boot:run
+```
+
+Backend runs on
+
+```
+http://localhost:8080
+```
+
+---
+
+### Frontend
+
+```bash
+cd Frontend
+npm install
+ng serve
+```
+
+Frontend runs on
+
+```
+http://localhost:4200
+```
+
+---
+
+## Future Improvements
+
+- Authentication (JWT)
+- Budget Tracking
+- Export to PDF
+- Export to Excel
+- Recurring Expenses
+- Dashboard Analytics
+- Notifications
+
+---
 
 ## Author
 
-Srijon Mitra
+**Srijon Mitra**
+
+LinkedIn:
+https://www.linkedin.com/in/srijon-mitra-4029b9223/
+
+GitHub:
+https://github.com/MitraSrijon
+
+---
+
+⭐ If you like this project, consider giving it a star.
